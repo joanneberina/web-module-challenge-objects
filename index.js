@@ -15,13 +15,11 @@ function createMenuItem(name, cost, category){
     return menu;
 }
 
-const 
-
-
-
-
 /* Task 1b: use your function to create 3 more menu items. You may add any items to the menu that you'd like */
-
+const taco = createMenuItem("Beef Taco", 3, "Lunch");
+const pasta = createMenuItem("Shrimp Pasta", 15, "Dinner");
+const chicken = createMenuItem("Fried Chicken", 10, "Dinner");
+console.log("New Menu Items:", taco, pasta, chicken);
 
 
 /* Task 2: You're having a lunch special! 25% off for teachers and students, 10% off for everyone else. Add a method to your burger object that automatically calculates price given a string as a parameter. 
@@ -33,8 +31,20 @@ Your method should accept:
 and should return a number. 
 
 For example, burger.discount("teacher") would return 13.5 and burger.discount("public") would return 16.2*/
+//add a new key to burger object with a function as a value
 
+burger.discount = (discountType) => {
+  //check parameter is equal to teacher or student
+  if (discountType === "teacher" || discountType === "student") {
+    //return discounted price
+    return burger.price * 0.75;
+  } else  {
+    return burger.price * 0.9;
+  }   
+}
 
+const Joanne = burger.discount("student");
+console.log(Joanne);
 
 ///////////////Reviews (MVP)///////////////////
 
@@ -49,12 +59,36 @@ const reviews = [{name: "Daniela", rating: 5, feedback:"Beautiful atmosphere and
 ]
 
 /* Task 3: Console.log just Julius' feedback */
+//For each item in the array, check if name equals Julius
+reviews.forEach((arrayItem) => {
+  if (arrayItem.name === "Julius") {
+    //console log the feedback of the item
+    console.log(arrayItem.feedback);
+  }
+})
 
 
 /* Task 4: Add a new rating with your (fictitious) opinions of the restaurant in the same format as the reviews above. */
+//create a new review object with name, rating and feedback
+const newReview = {
+  name: "Dennis",
+  rating: 5,
+  feedback: "Fried chicken is crispy and delicious"
+}
+//add new review to reviews array
+reviews.push(newReview);
+console.log(reviews);
 
 
-/* Task 5: Add the following feedback to Reyna's rating - "this place is chill with really cool people, great for getting work done on weekdays"
+/* Task 5: Add the following feedback to Reyna's rating - "this place is chill with really cool people, great for getting work done on weekdays"*/
+//Look for review that has name equals to Reyna
+reviews.forEach((arrayItem) => {
+  if (arrayItem.name === "Reyna") {
+    //add feedback to review object
+    arrayItem.feedback = "this place is chill with really cool people, great for getting work done on weekdays"
+  }
+})
+console.log(reviews);
 
 /*  Task 6: Write a function to return a review based on the index of the review in the array.
 
@@ -68,9 +102,13 @@ and should return a string in the format `{name} gave the restaurant a {rating},
  * For example, if getReviewByIndex is invoked with reviews and the number 0
  * it will return `Daniela gave the restaurant a 5 star review and their feedback was: Beautiful atmosphere and wonderful vegan options!`
 */
+
 function getReviewByIndex(reviews, index) {
-    /* code here */
+    return `${reviews[index].name} gave the restaurant a ${reviews[index].rating}, and their feedback was: ${reviews[index].feedback}`
   }
+
+const getReview = getReviewByIndex(reviews, 2);
+console.log(getReview);
   
 
 /* Task 7: Write a function to get information about the most recent review called `getLastReview`
@@ -82,9 +120,14 @@ and should return a string in the format `name} gave the restaurant a {rating}, 
 
 For example, if getLastReview is invoked passing the reviews array it will return `Reyna gave the restaurant a 3.5 star review and their feedback was: "this place is chill with really cool people, great for getting work done on weekdays"`.
 */
-function getLastReview(/* code here */) {
-    /* code here */
+function getLastReview(arrayParam) {
+  //find the index of last item in the array
+  const index = arrayParam.length - 1; //the index of tha last item is 1 less than the length because index starts at 0
+  return `${arrayParam[index].name} gave the restaurant a ${arrayParam[index].rating}, and their feedback was: ${arrayParam[index].feedback}`
   } 
+
+const lastReview = getLastReview(reviews);
+console.log(lastReview);
 
 
 ///////////////🍔☕️🍽 STRETCH🍔☕️🍽////////////////////
